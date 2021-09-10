@@ -5,7 +5,8 @@ import {
     StyleSheet, 
     TextInput, 
     Platform,
-    FlatList,    
+    FlatList,
+    Keyboard,    
 } from 'react-native';
 
 import { Button } from '../components/Button';
@@ -28,6 +29,8 @@ export function Home(){
         name: newSkill
     }        
     
+    Keyboard.dismiss()
+
     setMySkills(oldState => [...oldState, data]);
   }
 
@@ -53,11 +56,11 @@ export function Home(){
   }, [])
 
   return (    
-      <View style={styles.container}>      
+      <View style={styles.container} testID="home">       
         
 
         <Text style={styles.title}>
-            Welcome, Rodrigo 
+            Welcome, Daniel 
         </Text>  
 
         <Text style={styles.greetings}>
@@ -69,9 +72,11 @@ export function Home(){
             placeholder="New skill"
             placeholderTextColor="#555"
             onChangeText={setNewSkill}
+            testID="input-new"
         />
 
         <Button 
+            testID="button-add"
             title="Add"            
             onPress={handleAddNewSkill}             
         />
@@ -79,17 +84,21 @@ export function Home(){
         <Text style={[styles.title, { marginVertical: 50}]}> 
             MySkills
         </Text>             
-        
-        <FlatList 
-            data={mySkills}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-                <SkillCard 
-                    skill={item.name} 
-                    onPress={() => handleRemoveSkill(item.id)}
-                />
-            )}
-        />
+        {mySkills && (
+            <FlatList 
+            testID="flatlist"
+                data={mySkills}
+                keyExtractor={item => item.id}
+                keyboardShouldPersistTaps="never"
+                renderItem={({ item }) => (
+                    <SkillCard 
+                        skill={item.name} 
+                        onPress={() => handleRemoveSkill(item.id)}
+                    />
+                )}
+            />
+        )}
+  
             
       </View>
   )
