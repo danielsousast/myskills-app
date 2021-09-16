@@ -1,4 +1,4 @@
-package com.myskills;
+package com.daniel.myskills;
 
 import android.app.Application;
 import android.content.Context;
@@ -64,7 +64,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.myskills.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.daniel.myskills.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);
